@@ -1,5 +1,5 @@
 <template>
-   <div>home</div>
+   <div>typora.vue</div>
 </template>
 
 <script setup>

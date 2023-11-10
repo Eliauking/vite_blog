@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { routesListApi } from "@/api/index";
+import Router from "@/router";
 export const useUserStore = defineStore({
   id: "userInfo",
   state: () => ({

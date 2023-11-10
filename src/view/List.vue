@@ -1,5 +1,5 @@
 <template>
-   <div>home</div>
+   <div>List.vue</div>
 </template>
 
 <script setup>

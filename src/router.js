@@ -1,14 +1,9 @@
 import { createWebHashHistory, createRouter } from "vue-router";
-
+import LocalCache from "@/utils/localCache";
 const Routes = [
   {
     path: "/",
     redirect: "/home",
-  },
-  {
-    path: "/home",
-    name: "Home",
-    component: () => import("@/view/home.vue"),
   },
 ];
 const Router = createRouter({
@@ -26,5 +21,24 @@ const Router = createRouter({
   },
   routes: Routes,
 });
+LocalCache.getCache("userInfo").routesList.forEach((item, index) => {
+  let children = {};
+  if (item.parentId) {
+    children = item;
+  }
+  Router.addRoute({
+    path: item.path,
+    name: item.name,
+    component: () => import(/* @vite-ignore */ `./view/${item.component}`),
+    meta: {},
+    children: {
+      path: children.path,
+      name: children.name,
+      component: () =>
+        import(/* @vite-ignore */ `./view/${children.component}`),
+    },
+  });
+});
 
+console.log(Router.options.routes);
 export default Router;
